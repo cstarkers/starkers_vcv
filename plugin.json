@@ -1,0 +1,16 @@
+{
+  "slug": "starkers",
+  "name": "starkers",
+  "version": "0.0.1",
+  "license": "mit",
+  "brand": "starkers",
+  "author": "Campbell Starky",
+  "authorEmail": "",
+  "authorUrl": "",
+  "pluginUrl": "",
+  "manualUrl": "",
+  "sourceUrl": "",
+  "donateUrl": "",
+  "changelogUrl": "",
+  "modules": []
+}
