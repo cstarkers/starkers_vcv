@@ -491,7 +491,7 @@ struct Big_MarkoWidget : ModuleWidget {
 		addParam(createParamCentered<RoundSmallBlackKnob>(mm2px(Vec(138.0, 117.72)), module, Big_Marko::_8_TO_8_PROBABLILITY_PARAM));
 		addParam(createParamCentered<RoundBlackKnob>(mm2px(Vec(166.3, 119.71)), module, Big_Marko::STATE_8_LEVEL_PARAM));
 
-		addInput(createInputCentered<PJ301MPort>(mm2px(Vec(8.2, 6.75)), module, Big_Marko::CLOCK_INPUT));
+		addInput(createInputCentered<PJ301MPort>(mm2px(Vec(8.2, 13.75)), module, Big_Marko::CLOCK_INPUT));
 		addInput(createInputCentered<PJ301MPort>(mm2px(Vec(176.3, 18.0)), module, Big_Marko::STATE_1_LEVEL_INPUT));
 		addInput(createInputCentered<PJ301MPort>(mm2px(Vec(25.474, 20.936)), module, Big_Marko::_1_TO_1_PROBABILITY_INPUT));
 		addInput(createInputCentered<PJ301MPort>(mm2px(Vec(42.474, 20.936)), module, Big_Marko::_1_TO_2_PROBABILITY_INPUT));
@@ -501,7 +501,7 @@ struct Big_MarkoWidget : ModuleWidget {
 		addInput(createInputCentered<PJ301MPort>(mm2px(Vec(110.474, 20.936)), module, Big_Marko::_1_TO_6_PROBABILITY_INPUT));
 		addInput(createInputCentered<PJ301MPort>(mm2px(Vec(127.474, 20.936)), module, Big_Marko::_1_TO_7_PROBABILITY_INPUT));
 		addInput(createInputCentered<PJ301MPort>(mm2px(Vec(144.474, 20.936)), module, Big_Marko::_1_TO_8_PROBABILITY_INPUT));
-		addInput(createInputCentered<PJ301MPort>(mm2px(Vec(8.2, 32.74)), module, Big_Marko::RESET_INPUT));
+		addInput(createInputCentered<PJ301MPort>(mm2px(Vec(8.2, 39.74)), module, Big_Marko::RESET_INPUT));
 		addInput(createInputCentered<PJ301MPort>(mm2px(Vec(176.3, 32.53)), module, Big_Marko::STATE_2_LEVEL_INPUT));
 		addInput(createInputCentered<PJ301MPort>(mm2px(Vec(25.474, 35.466)), module, Big_Marko::_2_TO_1_PROBABILITY_INPUT));
 		addInput(createInputCentered<PJ301MPort>(mm2px(Vec(42.474, 35.466)), module, Big_Marko::_2_TO_2_PROBABILITY_INPUT));
@@ -566,7 +566,7 @@ struct Big_MarkoWidget : ModuleWidget {
 		addInput(createInputCentered<PJ301MPort>(mm2px(Vec(127.474, 122.656)), module, Big_Marko::_8_TO_7_PROBABILITY_INPUT));
 		addInput(createInputCentered<PJ301MPort>(mm2px(Vec(144.474, 122.656)), module, Big_Marko::_8_TO_8_PROBABILITY_INPUT));
 
-		addOutput(createOutputCentered<PJ301MPort>(mm2px(Vec(187.25, 7.269)), module, Big_Marko::OUTPUT_OUTPUT));
+		addOutput(createOutputCentered<PJ301MPort>(mm2px(Vec(187.25, 14.269)), module, Big_Marko::OUTPUT_OUTPUT));
 
 		addChild(createLightCentered<MediumLight<RedLight>>(mm2px(Vec(156.3, 18.0)), module, Big_Marko::STATE_1_ACTIVE_LIGHT));
 		addChild(createLightCentered<MediumLight<RedLight>>(mm2px(Vec(156.3, 32.53)), module, Big_Marko::STATE_2_ACTIVE_LIGHT));
