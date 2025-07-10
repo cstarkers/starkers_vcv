@@ -322,6 +322,7 @@ struct Big_Marko : Module {
 		configInput(_8_TO_8_PROBABILITY_INPUT, "");
 		configOutput(OUTPUT_OUTPUT, "");
 	}
+
 	uint8_t state = 0;
 	dsp::SchmittTrigger clockSchmitt, resetSchmitt;
 	// we need to recalculate on every sample anyway to capture input, so we may as well be lazy and only calc/store the relevant row
@@ -340,11 +341,16 @@ struct Big_Marko : Module {
 	}
 
 	void update_outputs(){
-		outputs[OUTPUT_OUTPUT].setVoltage(
-			fminf(
-				fmaxf(-5.f, inputs[STATE_1_LEVEL_INPUT+state].getVoltage()+ params[STATE_1_LEVEL_PARAM+state].getValue()),
-			5.f)
-		);
+		if (inputs[STATE_1_LEVEL_INPUT+state].isConnected()){
+			outputs[OUTPUT_OUTPUT].setVoltage(
+				inputs[STATE_1_LEVEL_INPUT+state].getVoltage()
+			);
+		}else{
+			outputs[OUTPUT_OUTPUT].setVoltage(
+				params[STATE_1_LEVEL_PARAM+state].getValue()
+			);
+		}
+
 		for (int i=0; i<LIGHTS_LEN; i++){
 			lights[i].setBrightness(i==state ? 1.f : 0.f);
 		}
