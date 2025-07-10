@@ -1,6 +1,7 @@
 #include "plugin.hpp"
 #include <math.h>
 #include "dsp/filter.hpp"
+#include <cstdio>
 
 struct Big_Marko : Module {
 	enum ParamId {
@@ -328,9 +329,11 @@ struct Big_Marko : Module {
 
 	void process(const ProcessArgs& args) override {
 		if (clockSchmitt.process(inputs[CLOCK_INPUT].getVoltage(), 0.1f, 1.f)) {
+			INFO("clock pulse detected");
 			advance_state();
 		}
 		if (resetSchmitt.process(inputs[RESET_INPUT].getVoltage(), 0.1f, 1.f)) {
+			INFO("reset detected");
 			reset();
 		}
 		update_outputs();
@@ -342,20 +345,25 @@ struct Big_Marko : Module {
 				fmaxf(-5.f, inputs[STATE_1_LEVEL_INPUT+state].getVoltage()+ params[STATE_1_LEVEL_PARAM+state].getValue()),
 			5.f)
 		);
+		for (int i=0; i<LIGHTS_LEN; i++){
+			lights[+state].setBrightness(i==state ? 1.f : 0.f);
+		}
 	}
 
 	void advance_state(){
+		INFO("advance_state called");
 		update_probs();
 		state=get_next_state();
 		return;
 	}
 	void reset(){
-		state=1;
+		state=0;
 		return;
 	}
 
 	//update the state based on the current probs (expects probs to be normalised and stacked)
 	uint8_t get_next_state(){
+		INFO("Getting next state");
 		float rando=random::uniform();
 		for (int i=0; i<7; i++){
 			if (probabilities[i]>rando){
@@ -367,6 +375,7 @@ struct Big_Marko : Module {
 
 	//pull in the probs for the relevant row and then normalise the probs
 	void update_probs(){
+		INFO("updating probs");
 		int offset=state*8;
 		float total=0;
 		float new_prob;
@@ -376,14 +385,18 @@ struct Big_Marko : Module {
 				inputs[offset+i].getVoltage()+params[offset+i].getValue()
 			);
 
-			probabilities[offset+i]=new_prob;
+			probabilities[i]=new_prob;
 			total+=new_prob;
 		}
+
+		INFO("read in probs as %.2f, %.2f, %.2f, %.2f, %.2f, %.2f, %.2f, %.2f", probabilities[0], probabilities[1], probabilities[2], probabilities[3], probabilities[4], probabilities[5], probabilities[6], probabilities[7]);
+
 		//probs are stacked so that we can just rng and find the first state whose prob is greater than some random
 		probabilities[0]=probabilities[0]/total;
 		for (int i=1; i<8; i++){
-			probabilities[i]=probabilities[i]/total;
+			probabilities[i]=(probabilities[i]/total)+probabilities[i-1];
 		}
+		INFO("stacking probs to %.2f, %.2f, %.2f, %.2f, %.2f, %.2f, %.2f, %.2f", probabilities[0], probabilities[1], probabilities[2], probabilities[3], probabilities[4], probabilities[5], probabilities[6], probabilities[7]);
 	}
 };
 
