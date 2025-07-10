@@ -346,7 +346,7 @@ struct Big_Marko : Module {
 			5.f)
 		);
 		for (int i=0; i<LIGHTS_LEN; i++){
-			lights[+state].setBrightness(i==state ? 1.f : 0.f);
+			lights[i].setBrightness(i==state ? 1.f : 0.f);
 		}
 	}
 
