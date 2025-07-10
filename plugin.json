@@ -12,5 +12,12 @@
   "sourceUrl": "",
   "donateUrl": "",
   "changelogUrl": "",
-  "modules": []
+  "modules": [
+    {
+      "slug": "Big_Marko",
+      "name": "Big_Marko",
+      "description": "A probabilistic melody sequencer",
+      "tags": []
+    }
+  ]
 }
